@@ -4,7 +4,7 @@ from email.mime.text import MIMEText
 
 def send_email(recipient, subject, body):
     sender_email = os.environ['EMAIL']
-    password = os.environ['PASSWORD']
+    password = os.environ['EMAIL_PASSWORD']
 
     msg = MIMEText(body)
     msg['Subject'] = subject
