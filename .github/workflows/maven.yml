@@ -64,5 +64,5 @@ jobs:
         run: python3 scripts/send_email.py
         env:
           EMAIL: ${{ secrets.EMAIL }}  # Variável de ambiente do GitHub Actions
-          PASSWORD: ${{ secrets.EMAIL_PASSWORD }}  # Senha do e-mail
+          PASSWORD: ${{ secrets.EMAIL_PASSWORD }}  # Senha
           RECIPIENT: ${{ secrets.RECIPIENT_EMAIL }}  # E-mail do destinatário
