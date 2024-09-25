@@ -1,31 +1,36 @@
 import os
 import smtplib
-import logging
 from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
 
-# Configuração do logging
-logging.basicConfig(level=logging.INFO)
 
-def send_email(recipient, subject, body):
-    sender_email = os.environ['EMAIL']
+def send_email():
+    # Obtendo variáveis de ambiente
+    email = os.environ['EMAIL']
     password = os.environ['PASSWORD']
+    recipient = os.environ['RECIPIENT']
 
-    msg = MIMEText(body)
-    msg['Subject'] = subject
-    msg['From'] = sender_email
+    # Criando a mensagem
+    subject = "Notificação do Pipeline"
+    body = "Pipeline executado!"
+
+    msg = MIMEMultipart()
+    msg['From'] = email
     msg['To'] = recipient
+    msg['Subject'] = subject
+
+    msg.attach(MIMEText(body, 'plain'))
 
     try:
-        with smtplib.SMTP('smtp.gmail.com', 587) as server:
+        # Conectando ao servidor SMTP
+        with smtplib.SMTP('smtp.gmail.com', 587) as server:  # Altere conforme necessário
             server.starttls()
-            server.login(sender_email, password)
+            server.login(email, password)
             server.send_message(msg)
-            logging.info(f'E-mail enviado para {recipient}')
+            print("E-mail enviado com sucesso!")
     except Exception as e:
-        logging.error(f'Erro ao enviar e-mail: {e}')
+        print(f"Erro ao enviar e-mail: {e}")
 
-if __name__ == '__main__':
-    recipient_email = os.environ['RECIPIENT']
-    subject = "Notificação de Pipeline"
-    body = "Pipeline executado!"
-    send_email(recipient_email, subject, body)
+
+if __name__ == "__main__":
+    send_email()

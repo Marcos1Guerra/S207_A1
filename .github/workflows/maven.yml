@@ -60,6 +60,7 @@ jobs:
     steps:
       - name: Executa scripts externos (versionados)
         uses: actions/checkout@v4
+        
       - name: Enviar e-mail de notificação
         run: python3 scripts/send_email.py
         env:
