@@ -4,7 +4,7 @@ from email.mime.text import MIMEText
 
 def send_email(recipient, subject, body):
     sender_email = os.environ['EMAIL']
-    password = os.environ['PASSWORD']
+    password = os.environ['EMAIL_PASSWORD']
 
     msg = MIMEText(body)
     msg['Subject'] = subject
@@ -21,7 +21,7 @@ def send_email(recipient, subject, body):
         print(f'Erro ao enviar e-mail: {e}')
 
 if __name__ == '__main__':
-    recipient_email = os.environ['RECIPIENT']
+    recipient_email = os.environ['RECIPIENT_EMAIL']
     subject = "Notificação de Pipeline"
     body = "Pipeline executado!"
     send_email(recipient_email, subject, body)
