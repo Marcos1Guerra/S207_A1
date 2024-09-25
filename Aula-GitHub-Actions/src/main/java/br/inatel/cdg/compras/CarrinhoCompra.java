@@ -13,36 +13,41 @@ public class CarrinhoCompra {
 	}
 
 	public void adiciona(Brownie bw) throws NumeroNegativoException {
-
-		if(bw.getQtd() > 0){
+		if (bw.getQtd() > 0) {
 			brownies.add(bw);
-		}else{
-			throw new NumeroNegativoException("Não é possivel adicionar uma quantidade negativa");
+		} else {
+			throw new NumeroNegativoException("Não é possível adicionar uma quantidade negativa");
 		}
+	}
 
+	public void remove(Brownie bw) {
+		brownies.remove(bw);
+	}
+
+	public void reset() {
+		brownies.clear();
 	}
 
 	public double somaTotal() {
 		double total = 0;
 		for (Brownie brownie : brownies) {
-			total += brownie.getValor();
+			total += brownie.getValor() * brownie.getQtd(); // Multiplicando valor pela quantidade
 		}
 
-		if(cupom != null && cupom.getDesconto() > 0){
+		if (cupom != null && cupom.getDesconto() > 0) {
 			return somaTotalComDesconto(total, cupom.getDesconto());
-		}else{
+		} else {
 			return total;
 		}
 	}
 
-	private double somaTotalComDesconto(double total, double desconto){
-		return total = total - (total*desconto);
+	private double somaTotalComDesconto(double total, double desconto) {
+		return total - (total * desconto);
 	}
 
 	public double somaTotalItens() {
 		double total = 0;
 		for (Brownie brownie : brownies) {
-
 			total += brownie.getQtd();
 		}
 		return total;
