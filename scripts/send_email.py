@@ -1,6 +1,10 @@
 import os
 import smtplib
+import logging
 from email.mime.text import MIMEText
+
+# Configuração do logging
+logging.basicConfig(level=logging.INFO)
 
 def send_email(recipient, subject, body):
     sender_email = os.environ['EMAIL']
@@ -16,9 +20,9 @@ def send_email(recipient, subject, body):
             server.starttls()
             server.login(sender_email, password)
             server.send_message(msg)
-            print(f'E-mail enviado para {recipient}')
+            logging.info(f'E-mail enviado para {recipient}')
     except Exception as e:
-        print(f'Erro ao enviar e-mail: {e}')
+        logging.error(f'Erro ao enviar e-mail: {e}')
 
 if __name__ == '__main__':
     recipient_email = os.environ['RECIPIENT']
