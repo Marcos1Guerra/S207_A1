@@ -134,7 +134,7 @@ public class TesteCarrinhoCompra {
             carrinho.adiciona(bw1); // adiciona 100 itens
         }
 
-        assertEquals(1000, carrinho.somaTotalItens(), 0.01);
+        assertEquals(10000, carrinho.somaTotalItens(), 0.01);
     }
 
     // Teste de comportamento (Padrão 10) verificando o carrinho após resetar
