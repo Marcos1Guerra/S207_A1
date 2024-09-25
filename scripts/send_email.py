@@ -2,28 +2,26 @@ import os
 import smtplib
 from email.mime.text import MIMEText
 
-def send_email():
-    recipient = os.getenv('EMAIL')
-    if not recipient:
-        raise ValueError("O endereço de e-mail do destinatário não foi definido.")
+def send_email(recipient, subject, body):
+    sender_email = os.environ['EMAIL']
+    password = os.environ['PASSWORD']
 
-    # Configurar o corpo do e-mail
-    msg = MIMEText("Pipeline executado com sucesso!")
-    msg['Subject'] = 'Notificação do Pipeline'
-    msg['From'] = 'remetente@dominio.com'  # Remetente genérico
+    msg = MIMEText(body)
+    msg['Subject'] = subject
+    msg['From'] = sender_email
     msg['To'] = recipient
 
-    # Conectar ao servidor SMTP
     try:
-        server = smtplib.SMTP('smtp.exemplo.com', 587)  # Substitua pelo seu servidor SMTP
-        server.starttls()
-        server.login('seu-email@dominio.com', 'sua-senha')  # Substitua pelo seu e-mail e senha
-        server.sendmail(msg['From'], [msg['To']], msg.as_string())
-        server.quit()
-        print("E-mail enviado com sucesso!")
+        with smtplib.SMTP('smtp.gmail.com', 587) as server:
+            server.starttls()
+            server.login(sender_email, password)
+            server.send_message(msg)
+            print(f'E-mail enviado para {recipient}')
     except Exception as e:
-        print(f"Erro ao enviar e-mail: {e}")
-        exit(1)
+        print(f'Erro ao enviar e-mail: {e}')
 
-if __name__ == "__main__":
-    send_email()
+if __name__ == '__main__':
+    recipient_email = os.environ['RECIPIENT']
+    subject = "Notificação de Pipeline"
+    body = "Pipeline executado!"
+    send_email(recipient_email, subject, body)
