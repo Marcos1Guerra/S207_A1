@@ -64,4 +64,4 @@ jobs:
       - name: Enviar e-mail de notificação
         run: scripts/send_email.sh
         env:
-          RECIPIENT: ${{ secrets.RECIPIENT }}  # E-mail do destinatário
+          RECIPIENT: ${{ secrets.RECIPIENT_EMAIL }}  # E-mail do destinatário
