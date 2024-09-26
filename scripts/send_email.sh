@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # Verifica se o destinatário foi fornecido
-if [ -z "$RECIPIENT_EMAIL" ]; then
-  echo "Erro: A variável de ambiente RECIPIENT_EMAIL não está definida."
+if [ -z "$RECIPIENT" ]; then
+  echo "Erro: A variável de ambiente RECIPIENT não está definida."
   exit 1
 fi
 
@@ -11,7 +11,7 @@ MESSAGE="Pipeline executado!"
 SUBJECT="Notificação do Pipeline"
 
 # Envia o e-mail
-echo "$MESSAGE" | mail -s "$SUBJECT" "$RECIPIENT_EMAIL"
+echo "$MESSAGE" | mail -s "$SUBJECT" "$RECIPIENT"
 
 # Verifica se o envio foi bem-sucedido
 if [ $? -eq 0 ]; then
