@@ -61,9 +61,6 @@ jobs:
       - name: Instalar mailutils
         run: sudo apt-get update && sudo apt-get install -y mailutils
 
-      - name: Listar arquivos no diretório scripts
-        run: ls -la scripts
-
       - name: Enviar e-mail de notificação
         run: sh scripts/send_email.sh
         env:
