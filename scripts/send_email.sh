@@ -1,6 +1,3 @@
-#!/bin/bash
-
-# Verifica se o destinatário foi fornecido
 if [ -z "$RECIPIENT" ]; then
   echo "Erro: A variável de ambiente RECIPIENT não está definida."
   exit 1
