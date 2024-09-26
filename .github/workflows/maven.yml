@@ -60,10 +60,10 @@ jobs:
     steps:
       - name: Executa scripts externos (versionados)
         uses: actions/checkout@v4
-        
+
       - name: Enviar e-mail de notificação
         run: python3 scripts/send_email.py
         env:
           EMAIL: ${{ secrets.EMAIL }}  # Variável de ambiente do GitHub Actions
-          PASSWORD: ${{ secrets.EMAIL_PASSWORD }}  # Senha
+          PASSWORD: ${{ secrets.EMAIL_PASSWORD }}  #  Senha
           RECIPIENT: ${{ secrets.EMAIL }}  # E-mail do destinatário
